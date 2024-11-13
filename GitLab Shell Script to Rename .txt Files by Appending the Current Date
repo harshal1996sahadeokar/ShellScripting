@@ -1,0 +1,19 @@
+#!/bin/bash
+# Define the date format (YYYY-MM-DD)
+DATE=$(date +"%Y-%m-%d")
+
+# Directory where .txt files are located
+DIRECTORY=/home/ec2-user/script.sh
+
+# Loop through all .txt files in the directory
+for FILE in "$DIRECTORY"/*.txt; do
+  if [ -e "$FILE" ]; then
+    # Extract the filename without extension
+    FILENAME=$(basename "$FILE" .txt)
+    # Rename the file by appending the date
+    mv "$FILE" "$DIRECTORY/${FILENAME}.$DATE"
+    echo "Renamed $FILE to ${FILENAME}.$DATE"
+  else
+    echo "No .txt files found in $DIRECTORY."
+  fi
+done
