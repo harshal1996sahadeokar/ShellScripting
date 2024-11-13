@@ -1,0 +1,15 @@
+#!/bin/bash
+# Monitor CPU and memory usage
+CPU_THRESHOLD=90
+MEM_THRESHOLD=75
+
+CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}')
+MEM_USAGE=$(free | grep Mem | awk '{print $3/$2 * 100.0}')
+
+if (( $(echo "$CPU_USAGE > $CPU_THRESHOLD" |bc -l) )); then
+  echo "CPU usage above $CPU_THRESHOLD%: $CPU_USAGE%" | tee -a /var/log/resource_usage.log
+fi
+
+if (( $(echo "$MEM_USAGE > $MEM_THRESHOLD" |bc -l) )); then
+  echo "Memory usage above $MEM_THRESHOLD%: $MEM_USAGE%" | tee -a /var/log/resource_usage.log
+fi
