@@ -1,0 +1,8 @@
+#!/bin/bash
+# Check if service is running, restart if not
+SERVICE="nginx"
+
+if ! systemctl is-active --quiet $SERVICE; then
+  echo "$SERVICE is not running. Restarting..." | tee -a /var/log/service_monitor.log
+  systemctl restart $SERVICE
+fi
