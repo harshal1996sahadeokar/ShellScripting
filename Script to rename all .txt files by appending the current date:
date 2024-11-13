@@ -1,0 +1,9 @@
+#!/bin/bash
+# Append current date to all .txt files
+DIRECTORY="/path/to/directory"
+DATE=$(date +%Y%m%d)
+
+for FILE in "$DIRECTORY"/*.txt; do
+  mv "$FILE" "${FILE%.txt}_$DATE.txt"
+done
+echo "Renamed all .txt files in $DIRECTORY"
