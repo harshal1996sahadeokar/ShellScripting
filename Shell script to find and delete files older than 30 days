@@ -1,6 +1,6 @@
 #!/bin/bash
 # Find and delete files older than 30 days in the specified directory
-DIRECTORY="/path/to/directory"
+DIRECTORY=/home/ec2-user/script.sh
 
 find "$DIRECTORY" -type f -mtime +30 -exec rm -f {} \;
 echo "Deleted files older than 30 days from $DIRECTORY"
